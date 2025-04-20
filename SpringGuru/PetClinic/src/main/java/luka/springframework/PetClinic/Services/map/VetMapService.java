@@ -4,9 +4,11 @@ import luka.springframework.PetClinic.Model.Speciality;
 import luka.springframework.PetClinic.Model.Vet;
 import luka.springframework.PetClinic.Services.SpecialityService;
 import luka.springframework.PetClinic.Services.VetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile({"default", "map"})
 public class VetMapService extends AbstractMapService<Vet,Long> implements VetService {
     private final SpecialityService specialityService;
 

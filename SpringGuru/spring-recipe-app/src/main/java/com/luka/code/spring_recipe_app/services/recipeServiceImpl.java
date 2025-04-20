@@ -15,6 +15,7 @@ public class recipeServiceImpl implements recipeService {
         this.recipeRepository = recipeRepository;
     }
 
+    @Override
     public List<Recipe> listRecipes(){
         List<Recipe> recipes=new ArrayList<>();
         recipeRepository.findAll().forEach(s->recipes.add(s));

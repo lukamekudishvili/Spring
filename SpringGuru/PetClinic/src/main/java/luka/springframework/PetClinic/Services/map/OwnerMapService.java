@@ -5,9 +5,11 @@ import luka.springframework.PetClinic.Model.Pet;
 import luka.springframework.PetClinic.Services.OwnerService;
 import luka.springframework.PetClinic.Services.PetService;
 import luka.springframework.PetClinic.Services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile({"default", "map"})
 public class OwnerMapService extends AbstractMapService<Owner, Long> implements OwnerService {
     private final PetTypeService petTypeService;
     private final PetService petService;
