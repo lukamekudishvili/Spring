@@ -3,14 +3,15 @@ package com.luv2code.springboot.cruddemo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="lm_employee")
+@Table(name="employee")
 public class Employee {
 
     // define fields
     @Id
     @Column(name="ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_seq")
-    @SequenceGenerator(name = "employee_id_seq", sequenceName = "lm_employee_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_id_seq")
+    //@SequenceGenerator(name = "employee_id_seq", sequenceName = "lm_employee_seq", allocationSize = 1)
     private int id;
 
     @Column(name="first_name")
