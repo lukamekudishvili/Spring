@@ -1,6 +1,13 @@
 package com.luka.firstjobapp.job;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="jobs")
 public class Job {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -9,6 +16,9 @@ public class Job {
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    public Job() {
+    }
 
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
         this.id = id;

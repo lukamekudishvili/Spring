@@ -1,53 +1,67 @@
 package com.luka.firstjobapp.job.impl;
 
+import ch.qos.logback.core.encoder.EchoEncoder;
 import com.luka.firstjobapp.job.Job;
+import com.luka.firstjobapp.job.JobRepository;
 import com.luka.firstjobapp.job.JobService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class JobServiceImpl implements JobService {
-    private List<Job> jobs = new ArrayList<>(List.of(
-            new Job(1L, "Software Engineer", "Develop and maintain web applications.",
-                    "70000", "100000", "San Francisco, CA"),
-            new Job(2L, "Data Analyst", "Analyze business data and generate reports.",
-                    "60000", "85000", "Chicago, IL"),
-            new Job(3L, "Project Manager", "Oversee project timelines and deliverables.",
-                    "80000", "110000", "Boston, MA")
-    ));
+
+    private JobRepository jobRepository;
+
+    @Autowired
+    public JobServiceImpl(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
     @Override
     public List<Job> findAll() {
-        return jobs;
+        return jobRepository.findAll();
     }
 
     @Override
     public void createJob(Job job) {
-        int id = jobs.size() + 1;
-        job.setId((long) id);
-        jobs.add(job);
+        jobRepository.save(job);
     }
 
     @Override
     public Job findById(Long id) {
-        for(Job job : jobs){
-            if(Objects.equals(job.getId(), id))return job;
-        }
-        return null;
+        return jobRepository.findById(id).orElse(null);
     }
 
     @Override
-    public int deleteJobById(Long id) {
-        for(Job job : jobs){
-            if(Objects.equals(job.getId(), id)){
-                jobs.remove(job);
-                return 1;
-            };
+    public boolean deleteJobById(Long id) {
+        try {
+            jobRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        return 0;
+
+    }
+
+    public boolean updateJob(Long id, Job updateJob){
+        Optional<Job> jobOptional=jobRepository.findById(id);
+
+        if(jobOptional.isPresent()){
+            Job job=jobOptional.get();
+
+            job.setTitle(updateJob.getTitle());
+            job.setDescription(updateJob.getDescription());
+            job.setMinSalary(updateJob.getMinSalary());
+            job.setMaxSalary(updateJob.getMaxSalary());
+            job.setLocation(updateJob.getLocation());
+            return true;
+        }
+        return false;
     }
 }

@@ -9,5 +9,5 @@ public interface JobService {
 
     Job findById(Long id);
 
-    int deleteJobById(Long id);
+    boolean deleteJobById(Long id);
 }
