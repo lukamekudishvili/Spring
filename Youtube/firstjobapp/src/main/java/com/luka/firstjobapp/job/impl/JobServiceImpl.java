@@ -27,7 +27,6 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void createJob(Job job) {
-        HttpStatus
         int id = jobs.size() + 1;
         job.setId((long) id);
         jobs.add(job);
@@ -39,5 +38,16 @@ public class JobServiceImpl implements JobService {
             if(Objects.equals(job.getId(), id))return job;
         }
         return null;
+    }
+
+    @Override
+    public int deleteJobById(Long id) {
+        for(Job job : jobs){
+            if(Objects.equals(job.getId(), id)){
+                jobs.remove(job);
+                return 1;
+            };
+        }
+        return 0;
     }
 }
