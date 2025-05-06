@@ -1,12 +1,11 @@
 package com.luka.firstjobapp.job;
 
+import com.luka.firstjobapp.company.Company;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,6 +26,7 @@ public class JobController {
     @PostMapping("/jobs")
     public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
+        Company c=job.getCompany();
 
         return new ResponseEntity<>("job added successfully", HttpStatus.CREATED);
     }
