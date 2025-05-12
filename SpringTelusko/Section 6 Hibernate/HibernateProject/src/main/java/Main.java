@@ -15,13 +15,14 @@ public class Main {
                         .configure().buildSessionFactory();                    //cfg.buildSessionFactory();
         Session session = sessionFactory.openSession();
 
-        Student student = new Student(12, 62, "Temo Qurkhuli");
+//        Student student = new Student(12, 62, "Temo Qurkhuli");
+//        Student student=session.find(Student.class,1);
 
-        Transaction transaction = session.beginTransaction();
+//        Transaction transaction = session.beginTransaction();
 
-        session.persist(student);
-        transaction.commit();
+//        session.persist(student);
+//        transaction.commit();
         session.close();
-        System.out.println(student);
+//        System.out.println(student);
     }
 }

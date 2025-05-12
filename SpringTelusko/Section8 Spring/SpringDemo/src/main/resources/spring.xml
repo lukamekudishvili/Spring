@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="alien" class="com.luka.Alien" autowire="byType">
+<!--        <constructor-arg name="computer" type="com.luka.Computer" ref="desktop"/>-->
+<!--       <property name="age" value="66"/> property used when want to have setter injection-->
+<!--        <property name="laptop" ref="laptop"/>-->
+<!--        <constructor-arg name="salary" type="int" value="8000"/>-->
+<!--        <constructor-arg name="computer" type="com.luka.Computer" ref="laptop"/>-->
+<!--        <constructor-arg name="age" type="int" value="66"/>-->
+
+
+<!--        <constructor-arg index="0" value="66"/>-->
+<!--        <constructor-arg index="1" value="8000"/>-->
+<!--        <constructor-arg index="2" ref="laptop"/>-->
+
+    </bean>
+
+<!--    <bean id="alien" class="com.luka.Alien" scope="prototype"/> &lt;!&ndash; if we want to change scope  as prototype&ndash;&gt;-->
+
+    <bean id="laptop" class="com.luka.Laptop"/>
+    <bean id="desktop" class="com.luka.Desktop" primary="true"/>
+
+
+
+</beans>
