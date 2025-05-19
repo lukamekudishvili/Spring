@@ -19,7 +19,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public JobPost addJob(JobPost jobPost) {
-       return jobRepository.persist(jobPost);
+       return jobRepository.save(jobPost);
     }
 
     @Override
@@ -28,7 +28,17 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobPost getJob(int id) {
-        return jobRepository.findById(id);
+    public JobPost getJob(Long id) {
+        return jobRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteJob(Long id) {
+        jobRepository.deleteById(id);
+    }
+
+    @Override
+    public List<JobPost> addJobs(List<JobPost> jobPosts) {
+        return jobRepository.saveAll(jobPosts);
     }
 }
