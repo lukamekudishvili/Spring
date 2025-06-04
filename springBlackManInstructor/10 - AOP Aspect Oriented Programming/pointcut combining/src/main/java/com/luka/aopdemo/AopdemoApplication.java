@@ -38,6 +38,8 @@ public class AopdemoApplication {
         accountDAO.addPost();
         System.out.println();
 
+        accountDAO.getName();
+
 
     }
 
