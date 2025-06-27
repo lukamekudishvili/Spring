@@ -1,33 +1,32 @@
 package com.lukacode.restful_Web_Services_Demo.exception;
 
 import java.time.LocalDateTime;
-import java.time.LocalDateTime;
 
 public class ErrorDetails {
-    private LocalDateTime timestamp;
-    private String message;
+    private LocalDateTime localDateTime;
+    private String errorMessage;
     private String details;
 
-    public ErrorDetails(LocalDateTime timestamp, String message, String details) {
-        this.timestamp = timestamp;
-        this.message = message;
+    public ErrorDetails(LocalDateTime localDateTime, String errorMessage, String details) {
+        this.localDateTime = localDateTime;
+        this.errorMessage = errorMessage;
         this.details = details;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
-    public String getMessage() {
-        return message;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public String getDetails() {

@@ -10,23 +10,23 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/userIntegration")
-public class UserController {
-    private final UserDaoService userDaoService;
+@RequestMapping("/userIntegration/jpa")
+public class UserJpaController {
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserDaoService userDaoService) {
-        this.userDaoService = userDaoService;
+    public UserJpaController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/users")
     public List<User> retrieveAllUsers(){
-        return userDaoService.findAll();
+        return userService.findAll();
     }
 
     @GetMapping(value="/users/{userId}")
     public User retrieveUserById(@PathVariable("userId") Integer id){
-        var user=userDaoService.getUserById(id);
+        var user=userService.findById(id);
         if(user == null){
             throw new UserNotFoundException("User not found with Id:%d".formatted(id));
         }
@@ -35,7 +35,7 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<User> createUser(@Valid @RequestBody User userToAdd){
-        var user=userDaoService.save(userToAdd);
+        var user=userService.save(userToAdd);
 
         URI location= ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -48,6 +48,6 @@ public class UserController {
 
     @DeleteMapping("/users/{userId}")
     public void deleteUserById(@PathVariable("userId") Integer id){
-        userDaoService.deleteById(id);
+        userService.deleteById(id);
     }
 }

@@ -18,7 +18,7 @@ public class Lec06Map {
                 .setYear(2002).build();
         var dealer=Dealer.newBuilder()
                 .putInventory(car1.getYear(),car1).putInventory(car2.getYear(), car2).build();
-        System.out.println(car1.getBodyStyle());
+        System.out.println(car1.getBodyStyle() );
 
     }
 }

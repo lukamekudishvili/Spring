@@ -1,19 +1,30 @@
 package com.lukacode.restful_Web_Services_Demo.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Size(min=2, message="name size must be minimum 2 symbols!")
+    @Size(min = 2, message = "name size must be more than 2 characters")
     private String name;
 
-    @Past(message="Message should be in the past!")
+    @Past(message="Birth date must be in the past")
     private LocalDate birthDate;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Post> posts;
+
+    public User(){}
     public User(Integer id, String name, LocalDate birthDate) {
         this.id = id;
         this.name = name;
@@ -42,6 +53,14 @@ public class User {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override

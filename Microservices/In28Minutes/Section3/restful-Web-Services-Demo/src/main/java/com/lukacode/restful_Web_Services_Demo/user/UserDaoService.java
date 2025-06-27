@@ -28,12 +28,14 @@ public class UserDaoService {
 
             return userToSave;
         }
-        return null;
+         throw new RuntimeException("User already exists!");
     }
 
     public User getUserById(Integer id){
-        Predicate<? super User> predicate= user -> user.getId().equals(id);
+        Predicate<? super User> predicate= (Predicate<User>) user -> user.getId().equals(id);
+
         return users.stream().filter(predicate).findFirst().orElse(null);
+
     }
 
     public void deleteById(Integer id){
