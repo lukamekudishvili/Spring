@@ -23,8 +23,18 @@ public class FilterSpecificationServiceImpl<T> implements FilterSpecificationSer
             List<Predicate> predicates = new ArrayList<>();
 
             for(var searchRequestDto : searchRequestDtos){
-                var predicate =criteriaBuilder.equal(root.get(searchRequestDto.getColumn()), searchRequestDto.getValue());
-                predicates.add(predicate);
+
+                switch(searchRequestDto.getOperation()){
+                    case EQUAL ->{
+                        Predicate equal =criteriaBuilder.equal(root.get(searchRequestDto.getColumn()), searchRequestDto.getValue());
+                        predicates.add(equal);
+                    }
+                    case LIKE -> {
+                        Predicate like=criteriaBuilder.like(root.get(searchRequestDto.getColumn()),"%"+searchRequestDto.getValue()+"%");
+                        predicates.add(like);
+                    }
+                    default -> throw new IllegalStateException("Unexpected value");
+                }
             }
 
             if(globalOperator.equals(RequestDto.GlobalOperator.AND)){
