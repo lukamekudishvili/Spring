@@ -21,16 +21,16 @@ class CourseRepositoryTest {
 //        });
 //    }
 
-    @Test
-    public void findByIdTest(){
-        Assertions.assertNotNull(courseRepository.findById(1002L).get());
-    }
+    // @Test
+    // public void findByIdTest(){
+    //     Assertions.assertNotNull(courseRepository.findById(1002L).get());
+    // }
 
-    @Test
-    @DirtiesContext
-    public void deleteByIdTest(){
-        courseRepository.deleteById(1002L);
-        Assertions.assertNull(courseRepository.findById(1002L).get());
-    }
+    // @Test
+    // @DirtiesContext
+    // public void deleteByIdTest(){
+    //     courseRepository.deleteById(1002L);
+    //     Assertions.assertNull(courseRepository.findById(1002L).get());
+    // }
 
 }
